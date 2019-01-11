@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class FragmentsB extends Fragment {
     @Nullable
@@ -24,15 +25,18 @@ public class FragmentsB extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view,savedInstanceState);
         Intent i = getActivity().getIntent();
         String s = i.getDataString();
         Notes note = new Notes(s);
+        note.setTime(Calendar.getInstance().getTime().toString());
         list.add(note);
-        adapter.notifyItemInserted(adapter.getItemCount()-1);
+
         adapter = new NotesAdapter(list,getContext());
         RecyclerView rv = view.findViewById(R.id.recyclerViewB);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(adapter);
+        adapter.notifyItemInserted(adapter.getItemCount()-1);
     }
 
 }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -25,11 +26,13 @@ public class FragmentsA extends Fragment {
 
     EditText et;
     Button bt;
+    TextView tv;
     Notes note;
     ArrayList<Notes> list = new ArrayList<>();
     NotesAdapter adapter;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view,savedInstanceState);
          bt = view.findViewById(R.id.button);
          et = view.findViewById(R.id.ettext);
 
@@ -37,9 +40,9 @@ public class FragmentsA extends Fragment {
              @Override
              public void onClick(View view) {
                  String s = et.getText().toString();
-                 note.setMessage(s);
-                 String t = Calendar.getInstance().getTime().toString();
-                 note.setTime(t);
+                 note = new Notes(s);
+//                 String t = Calendar.getInstance().getTime().toString();
+//                 note.setTime(t);
                  list.add(note);
                 adapter.notifyItemInserted(adapter.getItemCount()-1);
              }
